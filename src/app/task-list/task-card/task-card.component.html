@@ -1,0 +1,27 @@
+<div class="task-card" [class.completed]="task.completed">
+  <div class="task-content">
+    <input 
+      type="checkbox" 
+      [checked]="task.completed" 
+      (change)="onToggle()"
+      class="task-checkbox"
+    >
+    <div class="task-details">
+      <div class="task-header">
+        <span class="task-title">{{ task.title }}</span>
+        <span class="task-date" *ngIf="task.dueDate">
+          {{ task.dueDate | date:'MMM d' }}
+        </span>
+      </div>
+      <p class="task-description">{{ task.description }}</p>
+      <div class="task-footer">
+        <span class="task-assignee">
+          Assigned to: {{ assignedUser?.name || 'Unassigned' }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <button (click)="onDelete()" class="delete-button">
+    <span class="delete-icon">×</span>
+  </button>
+</div> 
