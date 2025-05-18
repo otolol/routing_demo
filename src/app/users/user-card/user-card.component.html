@@ -1,4 +1,4 @@
-<a routerLink="/tasks" class="user-card" routerLinkActive="selected">
+<a [routerLink]="['users', user.id]" class="user-card" routerLinkActive="selected">
   <div class="user-avatar">
     {{ user.name.charAt(0) }}
   </div>

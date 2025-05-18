@@ -9,7 +9,11 @@ export const routes: Routes = [
     component: NoTaskComponent,
   },
   {
-    path: 'tasks', //<domain>/tasks
+    path: 'users/:userId', //<domain>/users/<uid>
     component: TaskListComponent
   }
+  // {
+  //   path: 'tasks', //<domain>/tasks
+  //   component: TaskListComponent
+  // }
 ]
