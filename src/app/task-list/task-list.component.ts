@@ -5,6 +5,8 @@ import { TaskCardComponent, Task } from './task-card/task-card.component';
 import { User } from '../shared/interfaces/user.interface';
 import { TasksService } from '../services/tasks.service';
 import { UsersService } from '../services/users.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { combineLatest, map } from 'rxjs';
 
 @Component({
   selector: 'app-task-list',
@@ -19,13 +21,20 @@ export class TaskListComponent implements OnInit {
 
   constructor(
     private tasksService: TasksService,
-    private usersService: UsersService
-  ) {}
+    private usersService: UsersService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-    this.tasksService.getTasks().subscribe(tasks => {
-      this.tasks = tasks;
-    });
+
+    combineLatest([
+      this.tasksService.getTasks(),
+      this.route.paramMap.pipe(
+        map((param: ParamMap) => Number(param.get('userId')) || -1)
+      )
+    ]).subscribe(([tasks, userId]) => {
+      this.tasks = tasks.filter(task => task.userId === userId)
+    })
 
     this.usersService.getUsers().subscribe(users => {
       this.users = users;
