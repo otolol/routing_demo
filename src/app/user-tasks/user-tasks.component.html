@@ -1,0 +1,8 @@
+<div class="user-tasks-container">
+  <app-task-list
+    [tasks]="tasks"
+    [users]="users"
+    (toggle)="onTaskToggled($event)"
+    (delete)="onTaskDeleted($event)"
+  ></app-task-list>
+</div> 
